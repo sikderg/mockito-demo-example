@@ -114,7 +114,6 @@ public class EmployeeRepositoryTests {
 		savedEmployee.setEmail("s@s.com");
 		savedEmployee.setFullName("G Sikder");
 		Employee updatedEmployee = employeeRepository.save(savedEmployee);
-		
 		//then - verify the output
 		assertThat(updatedEmployee.getEmail()).isEqualTo("s@s.com");
 		assertThat(updatedEmployee.getFullName()).isEqualTo("G Sikder");
