@@ -2,20 +2,15 @@
  * 
  */
 package com.example.mockito.repository;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-
-import com.example.mockito.model.Employee;
-
-import lombok.Builder;
-
-import static org.assertj.core.api.Assertions.assertThat;
-
 import java.util.List;
-
+import java.util.Optional;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import com.example.mockito.model.Employee;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Goutam Sikder
@@ -117,6 +112,23 @@ public class EmployeeRepositoryTests {
 		//then - verify the output
 		assertThat(updatedEmployee.getEmail()).isEqualTo("s@s.com");
 		assertThat(updatedEmployee.getFullName()).isEqualTo("G Sikder");
+	}
+	
+	//JUnit test for delete employee operation
+	
+	@DisplayName("JUnit test for delete employee operation")
+	@Test
+	public void givenEmployeeObjectWhenDeleteThenRemoveEmployee() {
+		//given - precondition or setup
+		Employee employee = Employee.builder().fullName("Goutam Sikder").email("g@s.com").build();
+		employeeRepository.save(employee);
+		
+		//when - action to behavior that we are going to test
+		employeeRepository.delete(employee);
+		Optional<Employee> employeeDBOptional = employeeRepository.findById(employee.getId());
+		
+		//then - verify the output
+		assertThat(employeeDBOptional).isEmpty();
 	}
 
 }
