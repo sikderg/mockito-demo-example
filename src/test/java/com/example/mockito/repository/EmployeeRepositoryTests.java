@@ -8,6 +8,8 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import com.example.mockito.model.Employee;
 
+import lombok.Builder;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
@@ -60,6 +62,24 @@ public class EmployeeRepositoryTests {
 		// then - verify the output
 		assertThat(employeeList).isNotNull();
 		assertThat(employeeList.size()).isEqualTo(2);
+	}
+	
+	//JUnit test for get Employee By Id
+
+	@DisplayName("JUnit test for get Employee By Id")
+	@Test
+	public void givenEmployeeObjectWhenFindByIdThenReturnEmployeeObject() {
+		//given - precondition or setup
+		Employee employee = Employee.builder().fullName("Goutam Sikder").email("g@s.com").build();
+		employeeRepository.save(employee);
+
+		//when - action to behavior that we are going to test
+		Employee savedEmployee = employeeRepository.findById(employee.getId()).get();
+
+		//then - verify the output
+		assertThat(savedEmployee.getId()).isNotNull();
+		assertThat(savedEmployee).isEqualTo(employee);
+		assertThat(savedEmployee.getId()).isEqualTo(employee.getId());
 	}
 
 }
