@@ -28,8 +28,8 @@ public class EmployeeRepositoryTests {
 	@Autowired
 	private EmployeeRepository employeeRepository;
 
-	// JUnit test for get all employee operation
-	@DisplayName("JUnit test for get all employee operation")
+	// JUnit test for get save employee operation
+	@DisplayName("JUnit test for get save employee operation")
 	@Test
 	public void givenEmployeeObjectWhenSaveEmployeeThenReturnEmployeeObject() {
 
@@ -44,8 +44,8 @@ public class EmployeeRepositoryTests {
 
 	}
 
-	// JUnit test for Save List of Employee
-	@DisplayName("JUnit test for Save List of Employee")
+	// JUnit test for find List of Employee
+	@DisplayName("JUnit test for find List of Employee")
 	@Test
 	public void givenSaveListEmployeeWhenFindAllThen() {
 		// given - precondition or setup
