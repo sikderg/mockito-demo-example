@@ -168,4 +168,42 @@ public class EmployeeRepositoryTests {
 		assertThat(savedEmployee).isEqualTo(employee);
 	}
 
+	// JUnit test for Spring Data Native Query index Parameters
+
+	@DisplayName("JUnit test for Spring Data Native Query index Parameters")
+	@Test
+	public void givenEmployeeObjectWhenFindByNativeQueryIndexParamsThenValidateReturnEmployee() {
+		// given - precondition or setup
+		Employee employee = Employee.builder().fullName("Goutam Sikder").email("g@s.com").build();
+		employeeRepository.save(employee);
+		String fullNanme = "Goutam Sikder";
+		String email = "g@s.com";
+		// when - action to behavior that we are going to test
+		Employee savedEmployee = employeeRepository.findNativeSQL(fullNanme, email);
+
+		// then - verify the output
+		assertThat(savedEmployee).isNotNull();
+		assertThat(savedEmployee.getFullName()).isEqualTo(fullNanme);
+		assertThat(savedEmployee).isEqualTo(employee);
+	}
+
+	// JUnit test for Spring Data Native Query Named Parameters
+
+	@DisplayName("JUnit test for Spring Data Native Query Named Parameters")
+	@Test
+	public void givenEmployeeObjectWhenFindByNativeQueryNamedParamsThenValidateReturnEmployee() {
+		// given - precondition or setup
+		Employee employee = Employee.builder().fullName("Goutam Sikder").email("g@s.com").build();
+		employeeRepository.save(employee);
+		String fullNanme = "Goutam Sikder";
+		String email = "g@s.com";
+		// when - action to behavior that we are going to test
+		Employee savedEmployee = employeeRepository.findNativeSQLNamedParams(fullNanme, email);
+
+		// then - verify the output
+		assertThat(savedEmployee).isNotNull();
+		assertThat(savedEmployee.getFullName()).isEqualTo(fullNanme);
+		assertThat(savedEmployee).isEqualTo(employee);
+	}
+
 }

@@ -23,6 +23,7 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
 	 */
 	Optional<Employee> findByEmail(String email);
 
+	//Define custom query with index params
 	/**
 	 * @param fullNanme
 	 * @param email
@@ -31,6 +32,7 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
 	@Query("select e from Employee e where fullName = ?1 and email=?2")
 	Employee findJPQLQueryFullNameAndEmail(String fullNanme, String email);
 
+	//Define custom query with index params
 	/**
 	 * @param fullNanme
 	 * @param email
@@ -38,5 +40,23 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
 	 */
 	@Query("select e from Employee e where fullName = :fullName and email= :email")
 	Employee findJPQLNamedParamsFullNameAndEmail(@Param("fullName") String fullNanme, @Param("email") String email);
+	
+	//Define custom native query with index params
+	/**
+	 * @param fullNanme
+	 * @param email
+	 * @return Employee
+	 */
+	@Query(value = "select * from employees e where e.full_name = ?1 and email= ?2" , nativeQuery = true)
+	Employee findNativeSQL(String fullNanme, String email);
 
+	//Define custom native query with named params
+	/**
+	 * @param fullNanme
+	 * @param email
+	 * @return
+	 */
+	@Query(value = "select * from employees e where e.full_name = :fullNanme and email= :email" , nativeQuery = true)
+	Employee findNativeSQLNamedParams(@Param("fullNanme") String fullNanme, @Param("email") String email);
+	
 }
