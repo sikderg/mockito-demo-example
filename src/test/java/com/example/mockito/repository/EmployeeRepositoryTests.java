@@ -2,6 +2,7 @@
  * 
  */
 package com.example.mockito.repository;
+
 import java.util.List;
 import java.util.Optional;
 import org.junit.jupiter.api.DisplayName;
@@ -58,93 +59,112 @@ public class EmployeeRepositoryTests {
 		assertThat(employeeList).isNotNull();
 		assertThat(employeeList.size()).isEqualTo(2);
 	}
-	
-	//JUnit test for get Employee By Id
+
+	// JUnit test for get Employee By Id
 
 	@DisplayName("JUnit test for get Employee By Id")
 	@Test
 	public void givenEmployeeObjectWhenFindByIdThenReturnEmployeeObject() {
-		//given - precondition or setup
+		// given - precondition or setup
 		Employee employee = Employee.builder().fullName("Goutam Sikder").email("g@s.com").build();
 		employeeRepository.save(employee);
 
-		//when - action to behavior that we are going to test
+		// when - action to behavior that we are going to test
 		Employee savedEmployee = employeeRepository.findById(employee.getId()).get();
 
-		//then - verify the output
+		// then - verify the output
 		assertThat(savedEmployee.getId()).isNotNull();
 		assertThat(savedEmployee).isEqualTo(employee);
 		assertThat(savedEmployee.getId()).isEqualTo(employee.getId());
 	}
-	
-	//JUnit test for get employee by email operation
+
+	// JUnit test for get employee by email operation
 
 	@DisplayName("JUnit test for get employee by email operation")
 	@Test
 	public void givenEmployeeEmailWhenFindByEmailThenReturnEmployeeOnject() {
-		
-		//given - precondition or setup
+
+		// given - precondition or setup
 		Employee employee = Employee.builder().fullName("Goutam Sikder").email("g@s.com").build();
 		employeeRepository.save(employee);
-		
-		//when - action to behavior that we are going to test
+
+		// when - action to behavior that we are going to test
 		Employee savedEmployee = employeeRepository.findByEmail(employee.getEmail()).get();
-		
-		//then - verify the output
+
+		// then - verify the output
 		assertThat(savedEmployee).isNotNull();
 		assertThat(savedEmployee).isEqualTo(employee);
 	}
-	
-	//JUnit test for update employee operation
+
+	// JUnit test for update employee operation
 
 	@DisplayName("JUnit test for update employee operation")
 	@Test
 	public void givenEmployeeWhenUpdateEmployeeThenReturnUpdatedEmployee() {
-		//given - precondition or setup
+		// given - precondition or setup
 		Employee employee = Employee.builder().fullName("Goutam Sikder").email("g@s.com").build();
 		employeeRepository.save(employee);
 
-		//when - action to behavior that we are going to test
+		// when - action to behavior that we are going to test
 		Employee savedEmployee = employeeRepository.findById(employee.getId()).get();
 		savedEmployee.setEmail("s@s.com");
 		savedEmployee.setFullName("G Sikder");
 		Employee updatedEmployee = employeeRepository.save(savedEmployee);
-		//then - verify the output
+		// then - verify the output
 		assertThat(updatedEmployee.getEmail()).isEqualTo("s@s.com");
 		assertThat(updatedEmployee.getFullName()).isEqualTo("G Sikder");
 	}
-	
-	//JUnit test for delete employee operation
-	
+
+	// JUnit test for delete employee operation
+
 	@DisplayName("JUnit test for delete employee operation")
 	@Test
 	public void givenEmployeeObjectWhenDeleteThenRemoveEmployee() {
-		//given - precondition or setup
+		// given - precondition or setup
 		Employee employee = Employee.builder().fullName("Goutam Sikder").email("g@s.com").build();
 		employeeRepository.save(employee);
-		
-		//when - action to behavior that we are going to test
+
+		// when - action to behavior that we are going to test
 		employeeRepository.delete(employee);
 		Optional<Employee> employeeDBOptional = employeeRepository.findById(employee.getId());
-		
-		//then - verify the output
+
+		// then - verify the output
 		assertThat(employeeDBOptional).isEmpty();
 	}
-	
-	//JUnit test for Spring Data JPQL index Parameter
 
-	@DisplayName("JUnit test for Spring Data JPQL index Parameter")
+	// JUnit test for Spring Data JPQL index Parameters
+
+	@DisplayName("JUnit test for Spring Data JPQL index Parameters")
 	@Test
-	public void givenEmployeeObjectWhenFindByJPQLThenValidateReturnEmployee() {
-		//given - precondition or setup
+	public void givenEmployeeObjectWhenFindByJPQLIndexParamsThenValidateReturnEmployee() {
+		// given - precondition or setup
 		Employee employee = Employee.builder().fullName("Goutam Sikder").email("g@s.com").build();
 		employeeRepository.save(employee);
 		String fullNanme = "Goutam Sikder";
 		String email = "g@s.com";
-		//when - action to behavior that we are going to test
-		Employee savedEmployee = employeeRepository.findJPQLQueryFullNameAndEmail(fullNanme,email);
+		// when - action to behavior that we are going to test
+		Employee savedEmployee = employeeRepository.findJPQLQueryFullNameAndEmail(fullNanme, email);
 
-		//then - verify the output
+		// then - verify the output
+		assertThat(savedEmployee).isEqualTo(employee);
+	}
+
+	// JUnit test for Spring Data JPQL Named Parameters
+
+	@DisplayName("JUnit test for Spring Data JPQL Named Parameters")
+	@Test
+	public void givenEmployeeObjectWhenFindByJPQLNamedParamsThenValidateReturnEmployee() {
+		// given - precondition or setup
+		Employee employee = Employee.builder().fullName("Goutam Sikder").email("g@s.com").build();
+		employeeRepository.save(employee);
+		String fullNanme = "Goutam Sikder";
+		String email = "g@s.com";
+		// when - action to behavior that we are going to test
+		Employee savedEmployee = employeeRepository.findJPQLNamedParamsFullNameAndEmail(fullNanme, email);
+
+		// then - verify the output
+		assertThat(savedEmployee).isNotNull();
+		assertThat(savedEmployee.getFullName()).isEqualTo(fullNanme);
 		assertThat(savedEmployee).isEqualTo(employee);
 	}
 
