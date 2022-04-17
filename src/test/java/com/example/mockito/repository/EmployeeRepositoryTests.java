@@ -130,5 +130,22 @@ public class EmployeeRepositoryTests {
 		//then - verify the output
 		assertThat(employeeDBOptional).isEmpty();
 	}
+	
+	//JUnit test for Spring Data JPQL index Parameter
+
+	@DisplayName("JUnit test for Spring Data JPQL index Parameter")
+	@Test
+	public void givenEmployeeObjectWhenFindByJPQLThenValidateReturnEmployee() {
+		//given - precondition or setup
+		Employee employee = Employee.builder().fullName("Goutam Sikder").email("g@s.com").build();
+		employeeRepository.save(employee);
+		String fullNanme = "Goutam Sikder";
+		String email = "g@s.com";
+		//when - action to behavior that we are going to test
+		Employee savedEmployee = employeeRepository.findJPQLQueryFullNameAndEmail(fullNanme,email);
+
+		//then - verify the output
+		assertThat(savedEmployee).isEqualTo(employee);
+	}
 
 }
