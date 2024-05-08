@@ -6,7 +6,7 @@ package com.example.mockito.repository;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import javax.persistence.EntityManager;
+import jakarta.persistence.EntityManager;
 import javax.sql.DataSource;
 
 import org.junit.jupiter.api.DisplayName;

@@ -2,12 +2,8 @@
  * 
  */
 package com.example.mockito.service.impl;
-
 import java.util.Optional;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.example.mockito.exception.ResourceNotFoundException;
 import com.example.mockito.model.Employee;
 import com.example.mockito.repository.EmployeeRepository;
@@ -20,17 +16,13 @@ import com.example.mockito.service.EmployeeService;
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
 
-	/**
-	 * 
-	 */
 	
-	
-	private EmployeeRepository employeeRepository;
+	private final EmployeeRepository employeeRepository;
 
 	/**
 	 * @param employeeRepository
 	 */
-	@Autowired
+	
 	public EmployeeServiceImpl(EmployeeRepository employeeRepository) {
 		this.employeeRepository = employeeRepository;
 	}
