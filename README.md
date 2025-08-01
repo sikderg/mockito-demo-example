@@ -1,4 +1,3 @@
-```markdown
 # Spring Boot Mockito Demo Example
 
 This is a simple Spring Boot project that demonstrates how to use **Mockito** for unit testing. It covers mocking dependencies, writing service layer tests, and basic controller testing using `@Mock`, `@InjectMocks`, and `@WebMvcTest`.
