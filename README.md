@@ -6,7 +6,6 @@ This is a simple Spring Boot project that demonstrates how to use **Mockito** fo
 ## 📦 Project Structure
 
 ```
-
 mockito-demo-example/
 ├── src/
 │   ├── main/
