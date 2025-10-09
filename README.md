@@ -75,9 +75,9 @@ Mockito is used to mock dependencies in service and controller tests to isolate 
 
 ### Example Test Features
 
-* Mocking repository calls in service tests
-* Verifying service logic
-* Controller tests with `@WebMvcTest` and mocked services
+* Mocking repository calls in service tests.
+* Verifying service logic.
+* Controller tests with `@WebMvcTest` and mocked services.
 
 ## 📁 Example Test Class
 
