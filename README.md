@@ -24,7 +24,7 @@ mockito-demo-example/
 
 ````
 
-## 🧰 Technologies Used
+## 🧰 Technologies Used 
 
 - Java 17+ (or 11+ depending on your setup)
 - Spring Boot
